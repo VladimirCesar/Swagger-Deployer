@@ -1,0 +1,1033 @@
+swagger: "2.0"
+info:
+  description: "Описание методов http-сервиса 1С."
+  version: "1.0.0"
+  title: "HTTP-сервис цл_РеактПризма"
+host: "192.168.242.20"
+basePath: "/ut115_reactive-prisma/hs/reactive-prisma"
+tags:
+  - name: "НСИ"
+    description: "Поток нормативно-справочной информации (статичные данные)"
+  - name: "Динамичные данные"
+    description: "Поток динамичных данных (по подписке)"
+  - name: "Данные транзакции"
+    description: "Поток транзакционных данных (не хранящихся на стороне призма-сервер)"
+  - name: "Данные сообщения"
+    description: "Поток данных авторизации и ответа призма-сервера и 1С"
+paths:
+  /types-of-items:
+    get:
+      tags:
+        - "НСИ"
+      summary: "Зарегистрированные виды номенклатуры"
+      description: "Забирает из 1С зарегистрированные виды номенклатуры и удаляет регистрацию."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                toi_id:
+                  type: string
+                toi_name:
+                  type: string
+                toi_parent_id:
+                  type: string
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /settings-periods:
+    get:
+      tags:
+        - "НСИ"
+      summary: "Зарегистрированные периоды формирования отчета"
+      description: "Забирает из 1С зарегистрированные периоды формирования отчета и удаляет регистрацию."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                settings_period_id:
+                  type: string
+                settings_period_name:
+                  type: string
+                settings_period_days:
+                  type: number
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /warehouses:
+    get:
+      tags:
+        - "НСИ"
+      summary: "Зарегистрированные склады"
+      description: "Забирает из 1С зарегистрированные склады и удаляет регистрацию."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                warehouse_id:
+                  type: string
+                warehouse_name:
+                  type: string
+                warehouse_parent_id:
+                  type: string
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /types-of-prices:
+    get:
+      tags:
+        - "НСИ"
+      summary: "Зарегистрированные виды цен"
+      description: "Забирает из 1С зарегистрированные виды цен (кроме Себеста) и удаляет регистрацию."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                top_id:
+                  type: string
+                top_name:
+                  type: string
+                top_parent_id:
+                  type: string
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /segment-groups:
+    get:
+      tags:
+        - "НСИ"
+      summary: "Зарегистрированные сегменты (группы)"
+      description: "Забирает из 1С зарегистрированные сегменты (только группы) и удаляет регистрацию."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                segment_id:
+                  type: string
+                segment_name:
+                  type: string
+                segment_isGroup:
+                  type: boolean
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /items:
+    get:
+      tags:
+        - "НСИ"
+      summary: "Зарегистрированная номенклатура"
+      description: "Забирает из 1С зарегистрированную номенклатурру (только элементы, не группы) и удаляет регистрацию."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                _id:
+                  type: string
+                item_name:
+                  type: string
+                item_toi_id:
+                  type: string
+                item_code:
+                  type: string
+                item_producer:
+                  type: string
+                item_isService:
+                  type: boolean
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /registered-segments:
+    get:
+      tags:
+        - "НСИ"
+      summary: "Зарегистрированные сегменты (НЕ группы)"
+      description: "Забирает из 1С зарегистрированные сегменты (только элементы, не группы) и удаляет регистрацию."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                segment_id:
+                  type: string
+                segment_name:
+                  type: string
+                segment_parent_id:
+                  type: string
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /opp:
+    get:
+      tags:
+        - "НСИ"
+      summary: "Вид цены: Цена за онлайн оплату"
+      description: Получает из 1С GUID цены за онлайн оплату"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: string
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /registered-corridors:
+    get:
+      tags:
+        - "НСИ"
+      summary: "Зарегистрированные ценовые коридоры"
+      description: "Забирает из 1С зарегистрированные ценовые коридоры и удаляет регистрацию."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                corridor_id:
+                  type: string
+                corridor_name:
+                  type: string
+                corridor_start:
+                  type: number
+                corridor_end:
+                  type: number
+                corridor_isOff:
+                  type: boolean
+                corridor_isLast:
+                  type: boolean
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /addreqs:
+    get:
+      tags:
+        - "НСИ"
+      summary: "Зарегистрированные дополнительные реквизиты номенклатуры"
+      description: "Забирает из 1С зарегистрированные дополнительные реквизиты номенклатуры и удаляет регистрацию."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                addreqs_id:
+                  type: string
+                addreqs_name:
+                  type: string
+                addreqs_prop_id:
+                  type: string
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /allProps:
+    get:
+      tags:
+        - "НСИ"
+      summary: "Все доп. свойства номенклатуры"
+      description: "Получает все доп. свойства номенклатуры."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                allProps_property_id:
+                  type: string
+                allProps_type_of_item:
+                  type: string
+                allProps_property_name:
+                  type: string
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /registered-docs:
+    get:
+      tags:
+        - "Динамичные данные"
+      summary: "Зарегистрированные документы"
+      description: "Забирает из 1С зарегистрированные документы и удаляет регистрацию."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                doc_id:
+                  type: string
+                doc_name:
+                  type: string
+                doc_type:
+                  type: string
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /balance:
+    post:
+      tags:
+        - "Данные транзакции"
+      summary: "Остатки товаров на складе"
+      description: "Получает информацию об остатках товаров на складе."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: body
+          in: body
+          description: "TOIs - виды номенклатуры, список GUID'ов\nwarehouse - GUID склада\nperiodEnd - дата в формате ISO\nisDC - необязательный параметр, по умолчанию принимает значение 'Ложь'."
+          required: true
+          schema:
+            type: object
+            properties:
+              TOIs:
+                type: array
+                items:
+                  type: string
+              warehouse:
+                type: string
+              periodEnd:
+                type: string
+              isDC:
+                type: boolean
+                example: "false"
+      responses:
+        "200":
+          description: "Successful if isDC is false"
+          schema:
+            type: object
+            properties:
+              warehouse:
+                type: string
+              rows:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    balance_item_id:
+                      type: string
+                    balance_value:
+                      type: string
+        "210":
+          description: "Successful if isDC is true"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                balance_item_id:
+                  type: string
+                balance_value:
+                  type: string
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /transits:
+    post:
+      tags:
+        - "Данные транзакции"
+      summary: "Товары в пути на складе"
+      description: "Получает информацию о товарах в пути на склад."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: body
+          in: body
+          description: "TOIs - виды номенклатуры, список GUID'ов\nwarehouse - GUID склада\nperiodEnd - дата в формате ISO\nisDC - необязательный параметр, по умолчанию принимает значение 'Ложь'."
+          required: true
+          schema:
+            type: object
+            properties:
+              TOIs:
+                type: array
+                items:
+                  type: string
+              warehouse:
+                type: string
+              periodEnd:
+                type: string
+              isDC:
+                type: boolean
+                example: "false"
+      responses:
+        "200":
+          description: "Successful if isDC is false"
+          schema:
+            type: object
+            properties:
+              warehouse:
+                type: string
+              rows:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    transit_item_id:
+                      type: string
+                    transit_value:
+                      type: string
+        "210":
+          description: "Successful if isDC is true"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                transit_item_id:
+                  type: string
+                transit_value:
+                  type: string
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /items-from-doc:
+    post:
+      tags:
+        - "Данные транзакции"
+      summary: "Номенклатура из документа"
+      description: 'Получает массив номенклатуры из табличной части "Товары" документа определенного типа.'
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: string
+            example: '"doc GUID as string"'
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: string
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /manual-motivation:
+    post:
+      tags:
+        - "Данные транзакции"
+      summary: "Ручная мотивация"
+      description: "Получает значения ручной мотивации для данной номенклатуры."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              items:
+                type: array
+                items:
+                  type: string
+              periodEnd:
+                type: string
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                MM_item_id:
+                  type: string
+                MM_sum:
+                  type: number
+                MM_percent:
+                  type: number
+                MM_isOff:
+                  type: boolean
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /motivation:
+    post:
+      tags:
+        - "Данные транзакции"
+      summary: "Мотивация"
+      description: "Получает значения мотивации разных ценовых коридоров для номенклатуры по данным видам."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              TOIs:
+                type: array
+                items:
+                  type: string
+              periodEnd:
+                type: string
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: object
+            properties:
+              motivation_toi_id:
+                type: string
+              motivation_corridor_id:
+                type: string
+              motivation_margin:
+                type: number
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /pola:
+    post:
+      tags:
+        - "Данные транзакции"
+      summary: "Цены последнего закупа"
+      description: "Получает цены последнего закупа для номенклатуры по данным видам."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              TOIs:
+                type: array
+                items:
+                  type: string
+              periodEnd:
+                type: string
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: object
+            properties:
+              POLA_item_id:
+                type: string
+              POLA_price:
+                type: number
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /price:
+    post:
+      tags:
+        - "Данные транзакции"
+      summary: "Цены номенклатуры"
+      description: "Получает цены номенклатуры указанного типа цены на указанную дату для набора видов номенклатуры."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              TOIs:
+                type: array
+                items:
+                  type: string
+              TOP:
+                type: string
+              periodEnd:
+                type: string
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: object
+            properties:
+              TOP:
+                type: string
+              rows:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    item_id:
+                      type: string
+                    price:
+                      type: number
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /primecost:
+    post:
+      tags:
+        - "Данные транзакции"
+      summary: "Цены номенклатуры"
+      description: "Получает себестоимость номенклатуры на указанную дату для набора видов номенклатуры."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              TOIs:
+                type: array
+                items:
+                  type: string
+              periodEnd:
+                type: string
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                item_id:
+                  type: string
+                price:
+                  type: number
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+
+  /addreqs-value:
+    post:
+      tags:
+        - "Данные транзакции"
+      summary: "Значения доп. реквизитов"
+      description: "Получает значения доп. реквизитов на указанную дату для номенклатуры по данным видам номенклатуры."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              TOIs:
+                type: array
+                items:
+                  type: string
+              periodEnd:
+                type: string
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                _id:
+                  type: string
+                addreqs_id:
+                  type: string
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+
+  /segments:
+    post:
+      tags:
+        - "Данные транзакции"
+      summary: "Сегменты номенклатуры"
+      description: "Получает значения сегментов для номенклатуры по данным видам номенклатуры и группам сегментов."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              TOIs:
+                type: array
+                items:
+                  type: string
+              segmentsGroups:
+                type: array
+                items:
+                  type: string
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                segment_item_id:
+                  type: string
+                segment_id:
+                  type: string
+                segment_name:
+                  type: string
+                segment_parent_id:
+                  type: string
+                segment_parent_name:
+                  type: string
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /sold:
+    post:
+      tags:
+        - "Данные транзакции"
+      summary: "Продажи по складу"
+      description: "Получает значения продаж для номенклатуры по данным видам номенклатуры, складу и периоду"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              TOIs:
+                type: array
+                items:
+                  type: string
+              warehouse:
+                type: string
+              periodStart:
+                type: string
+              periodEnd:
+                type: string
+              isDC:
+                type: string
+                example: 'false'
+      responses:
+        "200":
+          description: "Successful if isDC is false"
+          schema:
+            type: object
+            properties:
+              warehouse:
+                type: string
+              rows:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    sold_item_id:
+                      type: string
+                    sold_value:
+                      type: number
+        "210":
+          description: "Successful if isDC is true"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                sold_item_id:
+                  type: string
+                sold_value:
+                  type: number
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+  /supPrice:
+    post:
+      tags:
+        - "Данные транзакции"
+      summary: "Прайсы поставщика"
+      description: "Получает значения прайсов поставщика для номенклатуры по данным видам номенклатуры и дате"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              TOIs:
+                type: array
+                items:
+                  type: string
+              periodEnd:
+                type: string
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                supPrice_item_id:
+                  type: string
+                supPrice_price:
+                  type: string
+                supPrice_date:
+                  type: string
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+
+  /apply:
+    post:
+      tags:
+        - "Данные сообщения"
+      summary: "Применить изменения"
+      description: "Приминяет изменения в 1С. Создает документы, регистрирует сегменты и прочее."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              login:
+                type: string
+              password:
+                type: string
+              SPData:
+                type: object
+                properties:
+                  workingDate:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type_of_price:
+                          type: string
+                        items:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              item_id:
+                                type: string
+                              price:
+                                type: number
+              SegmentsData:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    item_id:
+                      type: string
+                    toAdd:
+                      type: array
+                      items:
+                        type: string
+                    toRemove:
+                      type: array
+                      items:
+                        type: string
+              AddManualMotivation:
+                type: object
+                properties:
+                  workingDate:
+                    type: string
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        item_id:
+                          type: string
+                        value:
+                          type: number
+                        type:
+                          type: number
+              RemoveManualMotivation:
+                type: object
+                properties:
+                  workingDate:
+                    type: string
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        item_id:
+                          type: string
+              Transfers:
+                type: object
+                properties:
+                  workingDate:
+                    type: string
+                  docs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        w_sender:
+                          type: string
+                        w_receiver:
+                          type: string
+                        items:
+                          type: array
+                          items:
+                            type: string
+
+      responses:
+        "200":
+          description: "Successful"
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
+
+  /auth:
+    get:
+      tags:
+        - "Данные сообщения"
+      summary: "Авторизация"
+      description: "Получает в качестве токена авторизации GUID пользователя."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful"
+          schema:
+            type: string
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Uncaught exception"
