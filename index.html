@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,9 +9,18 @@
         Библиотека API
     </title>
 </head>
-<body>
-    <div id="api-list">
 
+<body>
+    <header>
+        <form id="upload_form" enctype="multipart/form-data" action="/upload/image" method="post">
+            <div>Добавить YAML файл</div>
+            <br>
+            <input type="file" id="addYAML" accept=".yaml">
+        </form>
+    </header>
+    <h1 style="text-align: center;">Библиотека API</h1>
+    <div id="api-list" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <!-- список всех API, формируется из yaml'ов в папке Defs -->
     </div>
     <script>
         const apiList = document.querySelector('#api-list');
@@ -25,6 +35,25 @@
                     apiList.appendChild(apiItem);
                 });
             });
+        const addYAML = document.querySelector('#addYAML');
+        addYAML.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            const formData = new FormData(document.querySelector('#upload_form'));
+            formData.append('file', file);
+            fetch('http://localhost:3001/addyaml', {
+                method: 'POST',
+                body: formData,
+                Headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then(response => response.text())
+                .then((msg) => {
+                    alert(msg);
+                    window.location.reload();
+                });
+        });
     </script>
 </body>
+
 </html>
