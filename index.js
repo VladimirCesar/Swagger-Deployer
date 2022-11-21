@@ -36,6 +36,7 @@ app.get('/apilist', (req, res) => {
 app.post('/addyaml', multer().single('file'), (req, res, next) => {
     const file = req.file;
     // get file extension
+    file.originalname = translit(decode_utf8(file.originalname));
     const fileExtensionIndex = file.originalname.lastIndexOf('.');
     if(fileExtensionIndex === -1) {
         res.status(400).send('Ошибка: файл не имеет расширения');
@@ -92,4 +93,56 @@ function FileNameWithoutExtension(fileName) {
 
 function YAMLDoc(path) {
     return yaml.load(fs.readFileSync(path, 'utf8'));
+}
+
+function decode_utf8(s) {
+    return decodeURIComponent(escape(s));
+}
+
+function translit(str) {
+    let transl = {
+        'а': 'a',
+        'б': 'b',
+        'в': 'v',
+        'г': 'g',
+        'д': 'd',
+        'е': 'e',
+        'ё': 'e',
+        'ж': 'zh',
+        'з': 'z',
+        'и': 'i',
+        'й': 'y',
+        'к': 'k',
+        'л': 'l',
+        'м': 'm',
+        'н': 'n',
+        'о': 'o',
+        'п': 'p',
+        'р': 'r',
+        'с': 's',
+        'т': 't',
+        'у': 'u',
+        'ф': 'f',
+        'х': 'h',
+        'ц': 'c',
+        'ч': 'ch',
+        'ш': 'sh',
+        'щ': 'shch',
+        'ъ': '',
+        'ы': 'y',
+        'ь': '',
+        'э': 'e',
+        'ю': 'yu',
+        'я': 'ya',
+    };
+    let result = '';
+    str = str.toLowerCase();
+    for(var i = 0; i < str.length; i++) {
+        if(transl[str[i]] != undefined) {
+            result += transl[str[i]];
+        } else {
+            result += str[i];
+        }
+    }
+    return result;
 }
