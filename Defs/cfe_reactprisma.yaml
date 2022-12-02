@@ -15,12 +15,12 @@ tags:
   - name: "Данные сообщения"
     description: "Поток данных авторизации и ответа призма-сервера и 1С"
 paths:
-  /types-of-items:
+  /types_of_items:
     get:
       tags:
         - "НСИ"
       summary: "Зарегистрированные виды номенклатуры"
-      description: "Забирает из 1С зарегистрированные виды номенклатуры и удаляет регистрацию."
+      description: "Забирает из 1С зарегистрированные виды номенклатуры и удаляет регистрацию. \n \n toi_id - ГУИД вида номенклатуры.\n toi_name - Наименование вида номенклатуры.\n toi_parent_id - ГУИД родителя вида номенклатуры."
       consumes:
         - "application/json"
       produces:
@@ -33,22 +33,25 @@ paths:
             items:
               type: object
               properties:
-                toi_id:
+                type_of_item_id:
                   type: string
-                toi_name:
+                  example: "000000-0000-0000-0000-000000"
+                type_of_item_name:
                   type: string
-                toi_parent_id:
+                  example: "Наименование"
+                type_of_item_parent_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
         "401":
           description: "Unauthorized"
         "500":
           description: "Uncaught exception"
-  /settings-periods:
+  /settings_periods:
     get:
       tags:
         - "НСИ"
       summary: "Зарегистрированные периоды формирования отчета"
-      description: "Забирает из 1С зарегистрированные периоды формирования отчета и удаляет регистрацию."
+      description: "Забирает из 1С зарегистрированные периоды формирования отчета и удаляет регистрацию. \n\n settings_period_id - ГУИД периода формирования отчета. \n settings_period_name - имя периода формирования отчета. \n settings_period_days - количество дней в периоде формирования отчета."
       consumes:
         - "application/json"
       produces:
@@ -63,10 +66,13 @@ paths:
               properties:
                 settings_period_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
                 settings_period_name:
                   type: string
+                  example: "Наименование"
                 settings_period_days:
                   type: number
+                  example: 14
         "401":
           description: "Unauthorized"
         "500":
@@ -76,7 +82,7 @@ paths:
       tags:
         - "НСИ"
       summary: "Зарегистрированные склады"
-      description: "Забирает из 1С зарегистрированные склады и удаляет регистрацию."
+      description: "Забирает из 1С зарегистрированные склады и удаляет регистрацию. \n\n warehouse_id - ГУИД склада. \n warehouse_name - Наименование склада. \n warehouse_parent_id - ГУИД родительской группы."
       consumes:
         - "application/json"
       produces:
@@ -91,20 +97,23 @@ paths:
               properties:
                 warehouse_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
                 warehouse_name:
                   type: string
+                  example: "Наименование"
                 warehouse_parent_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
         "401":
           description: "Unauthorized"
         "500":
           description: "Uncaught exception"
-  /types-of-prices:
+  /types_of_prices:
     get:
       tags:
         - "НСИ"
       summary: "Зарегистрированные виды цен"
-      description: "Забирает из 1С зарегистрированные виды цен (кроме Себеста) и удаляет регистрацию."
+      description: "Забирает из 1С зарегистрированные виды цен (кроме Себеста) и удаляет регистрацию. \n\n type_of_price_id - ГУИД вида цены. \n type_of_price_name - наименование вида цены. \n type_of_price_parent_id - ГУИД родительской группы."
       consumes:
         - "application/json"
       produces:
@@ -117,22 +126,25 @@ paths:
             items:
               type: object
               properties:
-                top_id:
+                type_of_price_id:
                   type: string
-                top_name:
+                  example: "000000-0000-0000-0000-000000"
+                type_of_price_name:
                   type: string
-                top_parent_id:
+                  example: "Наименование"
+                type_of_price_parent_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
         "401":
           description: "Unauthorized"
         "500":
           description: "Uncaught exception"
-  /segment-groups:
+  /segment_groups:
     get:
       tags:
         - "НСИ"
       summary: "Зарегистрированные сегменты (группы)"
-      description: "Забирает из 1С зарегистрированные сегменты (только группы) и удаляет регистрацию."
+      description: "Забирает из 1С зарегистрированные сегменты (только группы) и удаляет регистрацию. \n\n segment_id - ГУИД сегмента. \n segment_name - Наименование сегмента. segment_is_group - Булево, является группой или нет."
       consumes:
         - "application/json"
       produces:
@@ -147,9 +159,11 @@ paths:
               properties:
                 segment_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
                 segment_name:
                   type: string
-                segment_isGroup:
+                  example: "Наименование"
+                segment_is_group:
                   type: boolean
         "401":
           description: "Unauthorized"
@@ -160,7 +174,7 @@ paths:
       tags:
         - "НСИ"
       summary: "Зарегистрированная номенклатура"
-      description: "Забирает из 1С зарегистрированную номенклатурру (только элементы, не группы) и удаляет регистрацию."
+      description: "Забирает из 1С зарегистрированную номенклатурру (только элементы, не группы) и удаляет регистрацию. \n\n _id - ГУИД номенклатуры. \n item_name - Наименование номенклатуры. \n item_toi_id - ГУИД вида номенклатуры. \n item_code - Артуикул номенклатуры. \n item_producer - Наименование производителя. \n item_is_service - Булево, является услугой или нет."
       consumes:
         - "application/json"
       produces:
@@ -175,26 +189,31 @@ paths:
               properties:
                 _id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
                 item_name:
                   type: string
+                  example: "Наименование"
                 item_toi_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
                 item_code:
                   type: string
+                  example: "Артикул"
                 item_producer:
                   type: string
-                item_isService:
+                  example: "Производитель"
+                item_is_service:
                   type: boolean
         "401":
           description: "Unauthorized"
         "500":
           description: "Uncaught exception"
-  /registered-segments:
+  /registered_segments:
     get:
       tags:
         - "НСИ"
       summary: "Зарегистрированные сегменты (НЕ группы)"
-      description: "Забирает из 1С зарегистрированные сегменты (только элементы, не группы) и удаляет регистрацию."
+      description: "Забирает из 1С зарегистрированные сегменты (только элементы, не группы) и удаляет регистрацию. \n\n segment_id - ГУИД сегмента. \n segment_name - Наименование сегмента. \n segment_parent_id - ГУИД родительской группы."
       consumes:
         - "application/json"
       produces:
@@ -209,15 +228,18 @@ paths:
               properties:
                 segment_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
                 segment_name:
                   type: string
+                  example: "Наименование"
                 segment_parent_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
         "401":
           description: "Unauthorized"
         "500":
           description: "Uncaught exception"
-  /opp:
+  /online_payment_price:
     get:
       tags:
         - "НСИ"
@@ -232,16 +254,17 @@ paths:
           description: "Successful"
           schema:
             type: string
+            example: "000000-0000-0000-0000-000000"
         "401":
           description: "Unauthorized"
         "500":
           description: "Uncaught exception"
-  /registered-corridors:
+  /registered_corridors:
     get:
       tags:
         - "НСИ"
       summary: "Зарегистрированные ценовые коридоры"
-      description: "Забирает из 1С зарегистрированные ценовые коридоры и удаляет регистрацию."
+      description: "Забирает из 1С зарегистрированные ценовые коридоры и удаляет регистрацию. \n\n corridor_id - ГУИД ценового коридора. \n corridor_name - Наименование ценового коридора. \n corridor_start - Начало ценового коридора. \n corridor_end - Окончание ценового коридора. \n corridor_is_off - Булево, коридор активен или нет. \n corridor_is_last - Булево, последний в наборе коридоров или нет."
       consumes:
         - "application/json"
       produces:
@@ -256,26 +279,31 @@ paths:
               properties:
                 corridor_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
                 corridor_name:
                   type: string
+                  example: "Наименование"
                 corridor_start:
                   type: number
+                  example: 1
                 corridor_end:
                   type: number
-                corridor_isOff:
+                  example: 1000000
+                corridor_is_off:
                   type: boolean
-                corridor_isLast:
+                  example: false
+                corridor_is_last:
                   type: boolean
         "401":
           description: "Unauthorized"
         "500":
           description: "Uncaught exception"
-  /addreqs:
+  /additional_requisites:
     get:
       tags:
         - "НСИ"
       summary: "Зарегистрированные дополнительные реквизиты номенклатуры"
-      description: "Забирает из 1С зарегистрированные дополнительные реквизиты номенклатуры и удаляет регистрацию."
+      description: "Забирает из 1С зарегистрированные дополнительные реквизиты номенклатуры и удаляет регистрацию. \n\n additional_requisite_id - ГУИД доп. реквизита. \n additional_requisite_name - Наименование доп. реквизита. \n additional_requisite_prop_id - Свойство доп. реквизита."
       consumes:
         - "application/json"
       produces:
@@ -288,22 +316,25 @@ paths:
             items:
               type: object
               properties:
-                addreqs_id:
+                additional_requisite_id:
                   type: string
-                addreqs_name:
+                  example: "000000-0000-0000-0000-000000"
+                additional_requisite_name:
                   type: string
-                addreqs_prop_id:
+                  example: "Наименование"
+                additional_requisite_prop_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
         "401":
           description: "Unauthorized"
         "500":
           description: "Uncaught exception"
-  /allProps:
+  /all_additional_properties:
     get:
       tags:
         - "НСИ"
       summary: "Все доп. свойства номенклатуры"
-      description: "Получает все доп. свойства номенклатуры."
+      description: "Получает все доп. свойства номенклатуры.\n\n additional_property_id - ГУИД доп. свойства. \n additional_property_type_of_item_id - ГУИД вида номенклатуры доп. свойства. \n  additional_property_name - Наименование доп. свойства."
       consumes:
         - "application/json"
       produces:
@@ -316,22 +347,25 @@ paths:
             items:
               type: object
               properties:
-                allProps_property_id:
+                additional_property_id:
                   type: string
-                allProps_type_of_item:
+                  example: "000000-0000-0000-0000-000000"
+                additional_property_type_of_item_id:
                   type: string
-                allProps_property_name:
+                  example: "000000-0000-0000-0000-000000"
+                additional_property_name:
                   type: string
+                  example: "Наименование"
         "401":
           description: "Unauthorized"
         "500":
           description: "Uncaught exception"
-  /registered-docs:
+  /registered_docs:
     get:
       tags:
         - "Динамичные данные"
       summary: "Зарегистрированные документы"
-      description: "Забирает из 1С зарегистрированные документы и удаляет регистрацию."
+      description: "Забирает из 1С зарегистрированные документы и удаляет регистрацию.\n\n doc_id - ГУИД документа. \n doc_name - Наименование документа. \n doc_type - Вид документа."
       consumes:
         - "application/json"
       produces:
@@ -346,10 +380,13 @@ paths:
               properties:
                 doc_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
                 doc_name:
                   type: string
+                  example: "Наименование"
                 doc_type:
                   type: string
+                  example: "sp"
         "401":
           description: "Unauthorized"
         "500":
@@ -359,7 +396,7 @@ paths:
       tags:
         - "Данные транзакции"
       summary: "Остатки товаров на складе"
-      description: "Получает информацию об остатках товаров на складе."
+      description: "На основании переданных параметров, получает информацию об остатках товаров на складе. \n\nПараметры: \n type_of_items_id - ГУИД вида номенклатуры. \n warehouse_id - ГУИД склада. \n period_end - Дата окончания отчета. \n is_dc - Булево, является складом РЦ или нет. \n\n Ответ: \n warehouse - ГУИД склада. \n balance_item_id - ГУИД номенклатуры. \n balance_value - Значение остатков."
       consumes:
         - "application/json"
       produces:
@@ -367,20 +404,22 @@ paths:
       parameters:
         - name: body
           in: body
-          description: "TOIs - виды номенклатуры, список GUID'ов\nwarehouse - GUID склада\nperiodEnd - дата в формате ISO\nisDC - необязательный параметр, по умолчанию принимает значение 'Ложь'."
           required: true
           schema:
             type: object
             properties:
-              TOIs:
+              type_of_items_id:
                 type: array
                 items:
                   type: string
-              warehouse:
+                  example: "000000-0000-0000-0000-000000"
+              warehouse_id:
                 type: string
-              periodEnd:
+                example: "000000-0000-0000-0000-000000"
+              period_end:
                 type: string
-              isDC:
+                example: "2022-01-01T23:59:59.599Z"
+              is_dc:
                 type: boolean
                 example: "false"
       responses:
@@ -391,6 +430,7 @@ paths:
             properties:
               warehouse:
                 type: string
+                example: "000000-0000-0000-0000-000000"
               rows:
                 type: array
                 items:
@@ -398,8 +438,9 @@ paths:
                   properties:
                     balance_item_id:
                       type: string
+                      example: "000000-0000-0000-0000-000000"
                     balance_value:
-                      type: string
+                      type: number
         "210":
           description: "Successful if isDC is true"
           schema:
@@ -409,8 +450,9 @@ paths:
               properties:
                 balance_item_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
                 balance_value:
-                  type: string
+                  type: number
         "401":
           description: "Unauthorized"
         "500":
@@ -420,7 +462,7 @@ paths:
       tags:
         - "Данные транзакции"
       summary: "Товары в пути на складе"
-      description: "Получает информацию о товарах в пути на склад."
+      description: "На основании переданных параметров, получает информацию о товарах в пути на склад. \n\nПараметры: \n type_of_items_id - ГУИД вида номенклатуры. \n warehouse_id - ГУИД склада. \n period_end - Дата окончания отчета. \n is_dc - Булево, является складом РЦ или нет. \n\n Ответ: \n warehouse - ГУИД склада. \n transit_item_id - ГУИД номенклатуры. \n transit_value - Значение транзита (в пути на этот склад)."
       consumes:
         - "application/json"
       produces:
@@ -428,22 +470,23 @@ paths:
       parameters:
         - name: body
           in: body
-          description: "TOIs - виды номенклатуры, список GUID'ов\nwarehouse - GUID склада\nperiodEnd - дата в формате ISO\nisDC - необязательный параметр, по умолчанию принимает значение 'Ложь'."
           required: true
           schema:
             type: object
             properties:
-              TOIs:
+              type_of_items_id:
                 type: array
                 items:
                   type: string
-              warehouse:
+                  example: "000000-0000-0000-0000-000000"
+              warehouse_id:
                 type: string
-              periodEnd:
+                example: "000000-0000-0000-0000-000000"
+              period_end:
                 type: string
-              isDC:
+                example: "2022-01-01T23:59:59.599Z"
+              is_dc:
                 type: boolean
-                example: "false"
       responses:
         "200":
           description: "Successful if isDC is false"
@@ -452,6 +495,7 @@ paths:
             properties:
               warehouse:
                 type: string
+                example: "000000-0000-0000-0000-000000"
               rows:
                 type: array
                 items:
@@ -459,8 +503,9 @@ paths:
                   properties:
                     transit_item_id:
                       type: string
+                      example: "000000-0000-0000-0000-000000"
                     transit_value:
-                      type: string
+                      type: number
         "210":
           description: "Successful if isDC is true"
           schema:
@@ -470,18 +515,19 @@ paths:
               properties:
                 transit_item_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
                 transit_value:
-                  type: string
+                  type: number
         "401":
           description: "Unauthorized"
         "500":
           description: "Uncaught exception"
-  /items-from-doc:
+  /items_from_doc:
     post:
       tags:
         - "Данные транзакции"
       summary: "Номенклатура из документа"
-      description: 'Получает массив номенклатуры из табличной части "Товары" документа определенного типа.'
+      description: 'На основании переданных параметров, получает массив номенклатуры из табличной части "Товары" документа определенного типа по переданному документу.'
       consumes:
         - "application/json"
       produces:
@@ -492,7 +538,7 @@ paths:
           required: true
           schema:
             type: string
-            example: '"doc GUID as string"'
+            example: "000000-0000-0000-0000-000000"
       responses:
         "200":
           description: "Successful"
@@ -500,16 +546,17 @@ paths:
             type: array
             items:
               type: string
+              example: "000000-0000-0000-0000-000000"
         "401":
           description: "Unauthorized"
         "500":
           description: "Uncaught exception"
-  /manual-motivation:
+  /manual_motivation:
     post:
       tags:
         - "Данные транзакции"
       summary: "Ручная мотивация"
-      description: "Получает значения ручной мотивации для данной номенклатуры."
+      description: "На основании переданных параметров, получает значения ручной мотивации для данной номенклатуры. \n\nПараметры: \n type_of_items_id - ГУИД вида номенклатуры. \n period_end - Дата окончания отчета. \n\nОтвет: \n manual_motivation_item_id - ГУИД номенклатуры. \n manual_motivation_sum - Значение ручной мотивации (абс. сумма). \n manual_motivation_percent - Значение ручной мотивации (процент). \n manual_motivation_is_off - Булево, ручная мотивация на товар отключена или нет."
       consumes:
         - "application/json"
       produces:
@@ -521,12 +568,14 @@ paths:
           schema:
             type: object
             properties:
-              items:
+              type_of_items_id:
                 type: array
                 items:
                   type: string
-              periodEnd:
+                  example: "000000-0000-0000-0000-000000"
+              period_end:
                 type: string
+                example: "2022-01-01T23:59:59.599Z"
       responses:
         "200":
           description: "Successful"
@@ -535,13 +584,14 @@ paths:
             items:
               type: object
               properties:
-                MM_item_id:
+                manual_motivation_item_id:
                   type: string
-                MM_sum:
+                  example: "000000-0000-0000-0000-000000"
+                manual_motivation_sum:
                   type: number
-                MM_percent:
+                manual_motivation_percent:
                   type: number
-                MM_isOff:
+                manual_motivation_is_off:
                   type: boolean
         "401":
           description: "Unauthorized"
@@ -552,7 +602,7 @@ paths:
       tags:
         - "Данные транзакции"
       summary: "Мотивация"
-      description: "Получает значения мотивации разных ценовых коридоров для номенклатуры по данным видам."
+      description: "На основании переданных параметров, получает значения мотивации разных ценовых коридоров для номенклатуры по данным видам.\n\nПараметры: \n type_of_items_id - ГУИД вида номенклатуры. \n period_end - Дата окончания отчета. \n\nОтвет: \n motivation_type_of_item_id - ГУИД вида номенклатуры. \n motivation_corridor_id - ГУИД ценового коридора. \n motivation_margin - мотивация в проценте от маржи."
       consumes:
         - "application/json"
       produces:
@@ -564,34 +614,38 @@ paths:
           schema:
             type: object
             properties:
-              TOIs:
+              type_of_items_id:
                 type: array
                 items:
                   type: string
-              periodEnd:
+                  example: "000000-0000-0000-0000-000000"
+              period_end:
                 type: string
+                example: "2022-01-01T23:59:59.599Z"
       responses:
         "200":
           description: "Successful"
           schema:
             type: object
             properties:
-              motivation_toi_id:
+              motivation_type_of_item_id:
                 type: string
+                example: "000000-0000-0000-0000-000000"
               motivation_corridor_id:
                 type: string
+                example: "000000-0000-0000-0000-000000"
               motivation_margin:
                 type: number
         "401":
           description: "Unauthorized"
         "500":
           description: "Uncaught exception"
-  /pola:
+  /price_of_last_purchase:
     post:
       tags:
         - "Данные транзакции"
       summary: "Цены последнего закупа"
-      description: "Получает цены последнего закупа для номенклатуры по данным видам."
+      description: "На основании переданных параметров, получает цены последнего закупа для номенклатуры по данным видам.\n\nПараметры: \n type_of_items_id - ГУИД вида номенклатуры. \n period_end - Дата окончания отчета. \n\nОтвет:\n last_purchase_item_id - ГУИД номенклатуры. \n last_purchase_price - Значение цены."
       consumes:
         - "application/json"
       produces:
@@ -603,21 +657,24 @@ paths:
           schema:
             type: object
             properties:
-              TOIs:
+              type_of_items_id:
                 type: array
+                example: "000000-0000-0000-0000-000000"
                 items:
                   type: string
-              periodEnd:
+              period_end:
                 type: string
+                example: "2022-01-01T23:59:59.599Z"
       responses:
         "200":
           description: "Successful"
           schema:
             type: object
             properties:
-              POLA_item_id:
+              last_purchase_item_id:
                 type: string
-              POLA_price:
+                example: "000000-0000-0000-0000-000000"
+              last_purchase_price:
                 type: number
         "401":
           description: "Unauthorized"
@@ -628,7 +685,7 @@ paths:
       tags:
         - "Данные транзакции"
       summary: "Цены номенклатуры"
-      description: "Получает цены номенклатуры указанного типа цены на указанную дату для набора видов номенклатуры."
+      description: "На основании переданных параметров, получает цены номенклатуры указанного типа цены на указанную дату для набора видов номенклатуры.\n\nПараметры: \n type_of_price_id - ГУИД вида цены \n type_of_items_id - ГУИД вида номенклатуры. \n period_end - Дата окончания отчета. \n\nОтвет:\n type_of_price_id - ГУИД вида цены. \n item_id - ГУИД номенклатуры. \n price - Значение цены."
       consumes:
         - "application/json"
       produces:
@@ -640,22 +697,26 @@ paths:
           schema:
             type: object
             properties:
-              TOIs:
+              type_of_items_id:
                 type: array
                 items:
                   type: string
-              TOP:
+                  example: "000000-0000-0000-0000-000000"
+              type_of_price_id:
                 type: string
-              periodEnd:
+                example: "000000-0000-0000-0000-000000"
+              period_end:
                 type: string
+                example: "2022-01-01T23:59:59.599Z"
       responses:
         "200":
           description: "Successful"
           schema:
             type: object
             properties:
-              TOP:
+              type_of_price_id:
                 type: string
+                example: "000000-0000-0000-0000-000000"
               rows:
                 type: array
                 items:
@@ -663,6 +724,7 @@ paths:
                   properties:
                     item_id:
                       type: string
+                      example: "000000-0000-0000-0000-000000"
                     price:
                       type: number
         "401":
@@ -674,7 +736,7 @@ paths:
       tags:
         - "Данные транзакции"
       summary: "Цены номенклатуры"
-      description: "Получает себестоимость номенклатуры на указанную дату для набора видов номенклатуры."
+      description: "На основании переданных параметров, получает себестоимость номенклатуры на указанную дату для набора видов номенклатуры.\n\nПараметры: \n type_of_items_id - ГУИД вида номенклатуры. \n period_end - Дата окончания отчета. \n\nОтвет: \n item_id - ГУИД номенклатуры. \n price - Значение цены."
       consumes:
         - "application/json"
       produces:
@@ -686,12 +748,14 @@ paths:
           schema:
             type: object
             properties:
-              TOIs:
+              type_of_items_id:
                 type: array
                 items:
                   type: string
-              periodEnd:
+                  example: "000000-0000-0000-0000-000000"
+              period_end:
                 type: string
+                example: "2022-01-01T23:59:59.599Z"
       responses:
         "200":
           description: "Successful"
@@ -702,6 +766,7 @@ paths:
               properties:
                 item_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
                 price:
                   type: number
         "401":
@@ -709,12 +774,12 @@ paths:
         "500":
           description: "Uncaught exception"
 
-  /addreqs-value:
+  /additional_characteristics_values:
     post:
       tags:
         - "Данные транзакции"
       summary: "Значения доп. реквизитов"
-      description: "Получает значения доп. реквизитов на указанную дату для номенклатуры по данным видам номенклатуры."
+      description: "На основании переданных параметров, получает значения доп. реквизитов для номенклатуры по данным видам номенклатуры и доп. свойству.\n\nПараметры: \n type_of_items_id - ГУИД вида номенклатуры. \n property - ГУИД доп. свойства. \n\nОтвет: \n _id - ГУИД номенклатуры. \n additional_requisite_id - ГУИД доп. реквизита. \n additional_requisite_name - Наименование доп. реквизита."
       consumes:
         - "application/json"
       produces:
@@ -726,12 +791,14 @@ paths:
           schema:
             type: object
             properties:
-              TOIs:
+              type_of_items_id:
                 type: array
                 items:
                   type: string
-              periodEnd:
+                  example: "000000-0000-0000-0000-000000"
+              property:
                 type: string
+                example: "000000-0000-0000-0000-000000"
       responses:
         "200":
           description: "Successful"
@@ -742,8 +809,13 @@ paths:
               properties:
                 _id:
                   type: string
-                addreqs_id:
+                  example: "000000-0000-0000-0000-000000"
+                additional_requisite_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
+                additional_requisite_name:
+                  type: string
+                  example: "Наименование"
         "401":
           description: "Unauthorized"
         "500":
@@ -754,7 +826,7 @@ paths:
       tags:
         - "Данные транзакции"
       summary: "Сегменты номенклатуры"
-      description: "Получает значения сегментов для номенклатуры по данным видам номенклатуры и группам сегментов."
+      description: "На основании переданных параметров, получает значения сегментов для номенклатуры по данным видам номенклатуры и группам сегментов.\n\nПараметры: \n type_of_items_id - ГУИД вида номенклатуры. \n segment_groups - ГУИД группы сегмента. \n\nОтвет:\n segment_item_id - ГУИД номенклатуры. \n segment_id - ГУИД сегмента. \n segment_name - Наименование сегмента. \n segment_parent_id - ГУИД, родительская группа сегмента. \n segment_parent_name - Наименование родительской группы сегмента."
       consumes:
         - "application/json"
       produces:
@@ -766,14 +838,16 @@ paths:
           schema:
             type: object
             properties:
-              TOIs:
+              type_of_items_id:
                 type: array
                 items:
                   type: string
-              segmentsGroups:
+                  example: "000000-0000-0000-0000-000000"
+              segment_groups:
                 type: array
                 items:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
       responses:
         "200":
           description: "Successful"
@@ -784,14 +858,19 @@ paths:
               properties:
                 segment_item_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
                 segment_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
                 segment_name:
                   type: string
+                  example: "Наименоване"
                 segment_parent_id:
                   type: string
+                  example: "000000-0000-0000-0000-000000"
                 segment_parent_name:
                   type: string
+                  example: "Родитель.Наименование"
         "401":
           description: "Unauthorized"
         "500":
@@ -801,7 +880,7 @@ paths:
       tags:
         - "Данные транзакции"
       summary: "Продажи по складу"
-      description: "Получает значения продаж для номенклатуры по данным видам номенклатуры, складу и периоду"
+      description: "На основании переданных параметров, получает значения продаж для номенклатуры по данным видам номенклатуры, складу и периоду.\n\nПараметры: \n type_of_items_id - ГУИД вида номенклатуры. \n warehouse_id - ГУИД склада. \n period_start - Дата начала отчета. \n period_end - Дата окончания отчета. \n is_dc - Булево, является складом РЦ или нет. \n\nОтвет:\n warehouse - ГУИД склада. \n sold_item_id - ГУИД номенклатуры. \n sold_value - Значение проданного."
       consumes:
         - "application/json"
       produces:
@@ -813,19 +892,22 @@ paths:
           schema:
             type: object
             properties:
-              TOIs:
+              type_of_items_id:
                 type: array
                 items:
                   type: string
-              warehouse:
+                  example: "000000-0000-0000-0000-000000"
+              warehouse_id:
                 type: string
-              periodStart:
+                example: "000000-0000-0000-0000-000000"
+              period_start:
                 type: string
-              periodEnd:
+                example: "2022-01-01T23:59:59.599Z"
+              period_end:
                 type: string
-              isDC:
-                type: string
-                example: 'false'
+                example: "2022-01-01T23:59:59.599Z"
+              is_dc:
+                type: boolean
       responses:
         "200":
           description: "Successful if isDC is false"
@@ -834,6 +916,7 @@ paths:
             properties:
               warehouse:
                 type: string
+                example: "000000-0000-0000-0000-000000"
               rows:
                 type: array
                 items:
@@ -841,6 +924,7 @@ paths:
                   properties:
                     sold_item_id:
                       type: string
+                      example: "000000-0000-0000-0000-000000"
                     sold_value:
                       type: number
         "210":
@@ -858,12 +942,12 @@ paths:
           description: "Unauthorized"
         "500":
           description: "Uncaught exception"
-  /supPrice:
+  /supplier_prices:
     post:
       tags:
         - "Данные транзакции"
       summary: "Прайсы поставщика"
-      description: "Получает значения прайсов поставщика для номенклатуры по данным видам номенклатуры и дате"
+      description: "На основании переданных параметров, получает значения прайсов поставщика для номенклатуры по данным видам номенклатуры и дате. \n\nПараметры: \n type_of_items_id - ГУИД вида номенклатуры. \n period_end - Дата окончания отчета. \n\nОтвет:\n supplier_price_item_id - ГУИД номенклатуры. \n supplier_price_price - Значение цены. \n supplier_price_date - Дата закупа."
       consumes:
         - "application/json"
       produces:
@@ -875,12 +959,14 @@ paths:
           schema:
             type: object
             properties:
-              TOIs:
+              type_of_items_id:
                 type: array
                 items:
                   type: string
-              periodEnd:
+                  example: "000000-0000-0000-0000-000000"
+              period_end:
                 type: string
+                example: "2022-01-01T23:59:59.599Z"
       responses:
         "200":
           description: "Successful"
@@ -889,12 +975,14 @@ paths:
             items:
               type: object
               properties:
-                supPrice_item_id:
+                supplier_price_item_id:
                   type: string
-                supPrice_price:
+                  example: "000000-0000-0000-0000-000000"
+                supplier_price_price:
+                  type: number
+                supplier_price_date:
                   type: string
-                supPrice_date:
-                  type: string
+                  example: "2022-01-01T23:59:59.599Z"
         "401":
           description: "Unauthorized"
         "500":
@@ -905,7 +993,7 @@ paths:
       tags:
         - "Данные сообщения"
       summary: "Применить изменения"
-      description: "Приминяет изменения в 1С. Создает документы, регистрирует сегменты и прочее."
+      description: "Приминяет изменения в 1С. Создает документы, регистрирует сегменты и прочее.\n\nПараметры: \n login - Имя пользователя. \n password - Пароль пользователя. \n set_price_data - Данные для документов установки цен номенклатуры. \n workingDate - Рабочая дата. \n set_segments_data - Данные для установки сегментов. \n set_manual_motivation_data - Данные для установки ручной мотивации. \n unset_manual_motivation_data - Данные для отключения ручной мотивации \n transfer_docs_data - Данные для создания документов перемещения."
       consumes:
         - "application/json"
       produces:
@@ -919,13 +1007,16 @@ paths:
             properties:
               login:
                 type: string
+                example: "ИмяПользователя"
               password:
                 type: string
-              SPData:
+                example: "ПарольПользователя"
+              set_price_data:
                 type: object
                 properties:
                   workingDate:
                     type: string
+                    example: "2022-01-01T23:59:59.599Z"
                   data:
                     type: array
                     items:
@@ -933,6 +1024,7 @@ paths:
                       properties:
                         type_of_price:
                           type: string
+                          example: "000000-0000-0000-0000-000000"
                         items:
                           type: array
                           items:
@@ -940,28 +1032,33 @@ paths:
                             properties:
                               item_id:
                                 type: string
+                                example: "000000-0000-0000-0000-000000"
                               price:
                                 type: number
-              SegmentsData:
+              set_segments_data:
                 type: array
                 items:
                   type: object
                   properties:
                     item_id:
                       type: string
+                      example: "000000-0000-0000-0000-000000"
                     toAdd:
                       type: array
                       items:
                         type: string
+                        example: "000000-0000-0000-0000-000000"
                     toRemove:
                       type: array
                       items:
                         type: string
-              AddManualMotivation:
+                        example: "000000-0000-0000-0000-000000"
+              set_manual_motivation_data:
                 type: object
                 properties:
                   workingDate:
                     type: string
+                    example: "2022-01-01T23:59:59.599Z"
                   items:
                     type: array
                     items:
@@ -969,15 +1066,17 @@ paths:
                       properties:
                         item_id:
                           type: string
+                          example: "000000-0000-0000-0000-000000"
                         value:
                           type: number
                         type:
                           type: number
-              RemoveManualMotivation:
+              unset_manual_motivation_data:
                 type: object
                 properties:
                   workingDate:
                     type: string
+                    example: "2022-01-01T23:59:59.599Z"
                   items:
                     type: array
                     items:
@@ -985,11 +1084,13 @@ paths:
                       properties:
                         item_id:
                           type: string
-              Transfers:
+                          example: "000000-0000-0000-0000-000000"
+              transfer_docs_data:
                 type: object
                 properties:
                   workingDate:
                     type: string
+                    example: "2022-01-01T23:59:59.599Z"
                   docs:
                     type: array
                     items:
@@ -997,12 +1098,15 @@ paths:
                       properties:
                         w_sender:
                           type: string
+                          example: "000000-0000-0000-0000-000000"
                         w_receiver:
                           type: string
+                          example: "000000-0000-0000-0000-000000"
                         items:
                           type: array
                           items:
                             type: string
+                            example: "000000-0000-0000-0000-000000"
 
       responses:
         "200":
@@ -1017,7 +1121,7 @@ paths:
       tags:
         - "Данные сообщения"
       summary: "Авторизация"
-      description: "Получает в качестве токена авторизации GUID пользователя."
+      description: "В качестве токена авторизации получает GUID пользователя."
       consumes:
         - "application/json"
       produces:
@@ -1027,6 +1131,7 @@ paths:
           description: "Successful"
           schema:
             type: string
+            example: "000000-0000-0000-0000-000000"
         "401":
           description: "Unauthorized"
         "500":
